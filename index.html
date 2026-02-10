@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baliyari Fresh Fruit Store</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      margin:0;
+      background:#f2f2f2;
+    }
+    header{
+      background:#2e7d32;
+      color:white;
+      text-align:center;
+      padding:15px;
+    }
+    .container{
+      padding:20px;
+    }
+    .fruit{
+      background:white;
+      padding:15px;
+      margin-bottom:15px;
+      border-radius:10px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    .fruit img{
+      width:100%;
+      max-width:250px;
+      border-radius:10px;
+      display:block;
+      margin-bottom:10px;
+    }
+    .order-form{
+      background:white;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      margin-top:20px;
+    }
+    input, select, textarea, button{
+      width:100%;
+      padding:10px;
+      margin:8px 0;
+      font-size:15px;
+    }
+    button{
+      background:#2e7d32;
+      color:white;
+      border:none;
+      cursor:pointer;
+    }
+    footer{
+      background:#333;
+      color:white;
+      text-align:center;
+      padding:12px;
+      margin-top:20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🍎 Baliyari Fresh Fruit Store 🍌</h1>
+  <p>Delivery Area: Baliyari Mod, Tetrain, Khushi Chowmin, Chilli ke bagal me</p>
+</header>
+
+<div class="container">
+
+  <!-- Fruits Section -->
+  <div class="fruit">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg">
+    <h3>🍎 सेब – ₹120 / किलो</h3>
+  </div>
+
+  <div class="fruit">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg">
+    <h3>🍌 केला – ₹50 / दर्जन</h3>
+  </div>
+
+  <div class="fruit">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg">
+    <h3>🥭 आम – ₹100 / किलो</h3>
+  </div>
+
+  <!-- Order Form -->
+  <div class="order-form">
+    <h2>🛒 Online Order</h2>
+
+    <h3>📲 UPI Payment Available</h3>
+    <p>PhonePe / Google Pay / Paytm</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" style="max-width:200px;">
+    <p><b>UPI ID:</b> 6205485625-3@ybl</p>
+
+    <form onsubmit="sendWhatsApp(); return false;">
+      <input type="text" id="name" placeholder="आपका नाम" required>
+      <input type="tel" id="mobile" placeholder="मोबाइल नंबर" required>
+
+      <select id="fruit" onchange="calculatePrice()" required>
+        <option value="">फल चुनें</option>
+        <option value="120">सेब (₹120/kg)</option>
+        <option value="50">केला (₹50/dozen)</option>
+        <option value="100">आम (₹100/kg)</option>
+      </select>
+
+      <input type="number" id="qty" placeholder="मात्रा" onchange="calculatePrice()" required>
+      <input type="text" id="total" placeholder="कुल कीमत ₹" readonly>
+
+      <textarea id="address" placeholder="पूरा पता" required></textarea>
+
+      <button type="submit">WhatsApp पर Order भेजें</button>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <p>📢 आज का ऑफर: 2 किलो आम पर 250g फ्री 🎁</p>
+  <p>Cash on Delivery | UPI Accepted | Free Home Delivery (Local Area)</p>
+</footer>
+
+<script>
+  function calculatePrice(){
+    var price = document.getElementById("fruit").value;
+    var qty = document.getElementById("qty").value;
+    if(price && qty){
+      document.getElementById("total").value = price * qty;
+    }
+  }
+
+  function sendWhatsApp(){
+    var message =
+      "नया Fruit Order 📦%0A" +
+      "नाम: " + name.value + "%0A" +
+      "मोबाइल: " + mobile.value + "%0A" +
+      "फल: " + fruit.options[fruit.selectedIndex].text + "%0A" +
+      "मात्रा: " + qty.value + "%0A" +
+      "कुल कीमत: ₹" + total.value + "%0A" +
+      "पता: " + address.value + "%0A" +
+      "भुगतान: UPI / COD";
+
+    var whatsappNumber = "916205485625"; 
+    window.open("https://wa.me/" + whatsappNumber + "?text=" + message, "_blank");
+  }
+</script>
+
+</body>
+</html>
